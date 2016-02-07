@@ -31,3 +31,8 @@ Locally checked out python-opencage-geocoder
 
 For shell access to this, see : https://fusion-tables-api-samples.googlecode.com/svn/trunk/ftapi/README.html
 
+
+# Export
+
+    mongoexport -d code_for_trenton -c addresses > addresses.json
+    bzip2 addresses.json 
