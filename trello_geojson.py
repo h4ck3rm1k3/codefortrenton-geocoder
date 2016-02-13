@@ -53,20 +53,25 @@ for b in client.list_boards():
                     else:
                         #print ("gc:"+j)
                         d = eval(j)
-
+                        good = False
                         for l in d:
                             if 'geometry' in l:
-                                if 'annotations' in l:
-                                    if 'components' in l['annotations']:
-                                        if 'city' in l['annotations']['components']:
-                                            city = l['components']['city']
-                                            if city != 'Trenton':
-                                                print ("Skipping"+ city)
-                                                break
-                                            else:
-                                                pprint.pprint(l)
+                                if 'components' in l:
+                                    if 'city' in l['components']:
+                                        city = l['components']['city']
+                                        if city != 'Trenton':
+                                            print ("Skipping"+ city)                                            
                                         else:
-                                            pprint.pprint(l)
+                                        #pprint.pprint(l)
+                                            good = True                                                
+                                    else:
+                                        pass
+                                        #print ('no city')
+                                        #pprint.pprint(l['components'])
+                                else:
+                                    #print ('no components')
+                                    #pprint.pprint(l)
+                                    pass
                                             
                                 lat = l[u'geometry']['lat']
                                 lng = l[u'geometry']['lng']
@@ -80,7 +85,8 @@ for b in client.list_boards():
                                     }
                                 )
                                 #print p
-                                points.append(f)
+                                if good:
+                                    points.append(f)
                                 break
                                 #print ("To carto", c)
                             else:
