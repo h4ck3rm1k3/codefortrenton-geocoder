@@ -26,7 +26,7 @@ import pprint
 import geojson
 
 import geojson
-crs = geojson.crs.Named("urn:ogc:def:crs:OGC:1.3:CRS84")
+#crs = geojson.crs.Named("urn:ogc:def:crs:OGC:1.3:CRS84")
 
 points = []
 
@@ -59,7 +59,7 @@ for b in client.list_boards():
                                 lat = l[u'geometry']['lat']
                                 lng = l[u'geometry']['lng']
                                 #print ()
-                                p = geojson.Point((lat,lng),crs)
+                                p = geojson.Point((lng,lat))
                                 f = geojson.Feature(
                                     geometry=p,
                                     properties={
