@@ -80,7 +80,7 @@ for b in client.list_boards():
                                 f = geojson.Feature(
                                     geometry=p,
                                     properties={
-                                        "short_url": url,
+                                        "short_url": "<a href=" + url + ">"+url+"</a>",
                                         "description": desc
                                     }
                                 )
