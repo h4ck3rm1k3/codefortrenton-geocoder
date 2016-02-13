@@ -36,3 +36,12 @@ For shell access to this, see : https://fusion-tables-api-samples.googlecode.com
 
     mongoexport -d code_for_trenton -c addresses > addresses.json
     bzip2 addresses.json 
+
+
+# Geocoding of sms :
+
+1. using google voice to email trello
+2. trello as ticket storage
+3. using nltk to parse out text.
+4. using opencage for geocoding
+5. storing of geocode in ticket
