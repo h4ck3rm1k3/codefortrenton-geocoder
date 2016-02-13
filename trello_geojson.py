@@ -56,6 +56,18 @@ for b in client.list_boards():
 
                         for l in d:
                             if 'geometry' in l:
+                                if 'annotations' in l:
+                                    if 'components' in l['annotations']:
+                                        if 'city' in l['annotations']['components']:
+                                            city = l['components']['city']
+                                            if city != 'Trenton':
+                                                print ("Skipping"+ city)
+                                                break
+                                            else:
+                                                pprint.pprint(l)
+                                        else:
+                                            pprint.pprint(l)
+                                            
                                 lat = l[u'geometry']['lat']
                                 lng = l[u'geometry']['lng']
                                 #print ()
@@ -78,5 +90,7 @@ for b in client.list_boards():
                 else:
                     #print ("skip:"+txt)
                     pass
-c = geojson.FeatureCollection(points)
-print c
+c =  str(geojson.FeatureCollection(points))
+o = open('snow.geojson','w')
+o.write(c)
+o.close()
