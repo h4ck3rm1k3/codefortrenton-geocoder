@@ -38,10 +38,61 @@ For shell access to this, see : https://fusion-tables-api-samples.googlecode.com
     bzip2 addresses.json 
 
 
-# Geocoding of sms :
+# Geocoding of google voice transcriptions :
 
 1. using google voice to email trello
+you need to get the trello email http://blog.trello.com/create-cards-via-email/
+then in google you add that email as an alternative email for your account.
+You will get a confirmation email as a ticket that you need to confirm.
+
 2. trello as ticket storage
+Then in google voice you have the email notications send to that email. Also
+turn on do not disturb. 
+
 3. using nltk to parse out text.
+Setup nltk python http://www.nltk.org/ for parsing the text of the transcriptions
+
 4. using opencage for geocoding
+
+Setup of opencage :
+https://geocoder.opencagedata.com/
+
+get the private key.
+
+using this lib:
+https://github.com/opencagedata/python-opencage-geocoder
+
 5. storing of geocode in ticket
+
+get the trello api key.
+Using github.com/sarumont/py-trello for the trello api. See secrets.py for some
+tips on setting up the keys. 
+
+The script that does this is : trello_geocode.py
+it runs on a cron job every x minutes on linux.
+
+    */2 * * * *  bash ~/experiments/codefortrenton/cron.sh
+
+That calls into ~/experiments/codefortrenton/cron.sh
+
+    cd ~/experiments/codefortrenton/
+    python ./trello_geocode.py
+
+
+All tickets that are not marked with a GeoCode will be marked.
+
+6. Creating of the geojson
+trello_geojson.py produces a geojson file, this is then copied into the webpage
+branch. This is not automated yet.
+
+I filter out all geocodes not in the city of trenton.
+
+7. setup of trello connection to slac.
+
+
+## TODO :
+
+1. setup a way for people to subscribe to tickets based on an area
+2. setup publishing geojson on new tickets.
+3. setup a shell account for running the script (or do this on a website, but
+   we will need a cron job)
